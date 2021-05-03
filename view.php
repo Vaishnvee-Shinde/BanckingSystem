@@ -187,7 +187,7 @@ td{
     <div class="topnav-right">
         <a href="index.html"  >Home</a>
         <a class="active" href="View.php">View Customers</a>
-        <a href="Transc.php">View Transactions</a>
+        <a href="transc.php">View Transactions</a>
   </div>
 </div>
 
