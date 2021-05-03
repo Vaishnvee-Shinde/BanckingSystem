@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2021 at 07:26 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.11
+-- Generation Time: May 03, 2021 at 08:29 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,11 +41,16 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`UserID`, `Name`, `Email`, `Acc_Number`, `IFSC`, `Balance`) VALUES
-(446516, 'Jimmy', 'jimmy@gmail.com', 1431221, 'WWQ9551562', 17780),
-(251262, 'Chloe', 'chloeroy@gmail.com', 2421522, 'AS18485151', 3155),
-(132456, 'Aswin', 'ps.aswin@yahoo.com', 3421312, 'SA1651466SD', 10395),
-(652841, 'Juno', 'junos@outlook.com', 6213123, 'SD1231232X', 10345),
-(815626, 'Shahkeeb', 'shahke@gmial.com', 8923222, 'AS565656S', 4325);
+(448966, 'Vrusha', 'Veushali22@gmail.com', 14398, 'ASQ9981562', 13900),
+(346578, 'Aradhya', 'Aradhyac@gmail.com', 223367, 'AS189231', 40800),
+(346569, 'Zeba', 'zebarow@gmail.com', 224456, 'AS189754V', 91000),
+(9045864, 'Kartik', 'kartik990@gmail.com', 349456, 'AC3475370D', 86100),
+(9045236, 'Sanju', 's.sanju@gmail.com', 349756, 'AC3465890D', 91000),
+(446516, 'Vaishnvee', 'vaishnvee169@gmail.com', 1431221, 'WWQ9551562', 8000),
+(841652, 'Arjun', 'Arjun124@outlook.com', 3162123, 'SD9856785X', 903450),
+(876815, 'Rahi', 'Rahi45v@gmial.com', 3294892, 'AS576457S', 34400),
+(847543, 'Arjuna', 'j.Arjuna@outlook.com', 8962123, 'SD985675Y', 89800),
+(87653, 'Abhishek', 'dev.abhishek@yahoo.com', 9569876, 'SA875436SD', 74360);
 
 -- --------------------------------------------------------
 
@@ -67,17 +72,15 @@ CREATE TABLE `transfer` (
 --
 
 INSERT INTO `transfer` (`s_name`, `s_acc_no`, `r_name`, `r_acc_no`, `amount`, `date_time`) VALUES
-('Abhiram', 1431221, 'Mark', 2421522, 500, '2021-04-29 05:57:59'),
-('Aswin', 3421312, 'Prashant', 6213123, 325, '2021-04-29 05:58:20'),
-('Mark', 2421522, 'Adarsh', 8923222, 325, '2021-04-29 05:58:35'),
-('Adarsh', 8923222, 'Abhiram', 1431221, 5000, '2021-04-29 05:58:48'),
-('Mark', 2421522, 'Prashant', 6213123, 5020, '2021-04-29 05:59:05'),
-('Abhiram', 1431221, 'Aswin', 3421312, 7543, '2021-04-29 06:00:14'),
-('Jimmy', 1431221, 'Aswin', 3421312, 123, '2021-04-29 14:22:41'),
-('Jimmy', 1431221, 'Aswin', 3421312, 333, '2021-04-29 15:04:54'),
-('Jimmy', 1431221, 'Aswin', 3421312, 1221, '2021-04-29 16:23:36'),
-('Aswin', 3421312, 'Jimmy', 1431221, 4000, '2021-04-29 16:24:15'),
-('Juno', 6213123, 'Jimmy', 1431221, 10000, '2021-04-29 17:00:48');
+('Arjuna', 8962123, 'Rahi', 3294892, 200, '2021-05-02 09:40:57'),
+('Abhishek', 9569876, 'Aradhya', 223367, 10000, '2021-05-02 09:53:43'),
+('Abhishek', 9569876, 'Rahi', 3294892, 200, '2021-05-02 09:53:59'),
+('Vaishnvee', 1431221, 'Zeba', 224456, 2000, '2021-05-02 09:58:39'),
+('Vrusha', 14398, 'Kartik', 349456, 100, '2021-05-02 10:19:48'),
+('Rahi', 3294892, 'Vrusha', 14398, 10000, '2021-05-02 10:23:12'),
+('Vrusha', 14398, 'Sanju', 349756, 1000, '2021-05-02 10:24:29'),
+('Kartik', 349456, 'Rahi', 3294892, 4000, '2021-05-02 10:31:01'),
+('Vrusha', 14398, 'Abhishek', 9569876, 5000, '2021-05-03 05:36:51');
 
 --
 -- Indexes for dumped tables
