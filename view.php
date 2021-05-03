@@ -148,6 +148,37 @@ td{
          margin:0px;
      } 
 }
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child) {
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+  
+}
+
+@media screen and (max-width: 400px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .topnav.responsive .dropdown {float: none;}
+  .topnav.responsive .dropdown-content {position: relative;}
+  .topnav.responsive .dropdown .dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
 </style>
 </head>
 <body>
@@ -161,7 +192,7 @@ td{
 </div>
 
 <div class="header">
-<h5 style="padding-right: 1rem">Online Serivice</h5>
+<h5 style="padding-right: 1rem">Bank Serivice</h5>
 </div>
 <script>
 function myFunction() {
@@ -184,7 +215,6 @@ function myFunction() {
 
 <?php
 $conn = mysqli_connect("localhost", "root", "", "qxp");
-
 // Check connection
 if ($conn->connect_error) {
 die("Connection failed: " . $conn->connect_error);
@@ -192,9 +222,7 @@ die("Connection failed: " . $conn->connect_error);
 $sql = "SELECT name, acc_number FROM customer";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
-
 // output data of each row
-
 while($row = $result->fetch_assoc()) {
     echo "<tr>";
     echo "<form method ='post' action = 'OneCustomer.php'>";

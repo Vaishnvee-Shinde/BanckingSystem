@@ -3,7 +3,6 @@
 
 <head>
     <title>Basic Bank System</title>
-    <!-- CSS Start From Here -->
     <style>
         body {
             background-color: white;
@@ -68,8 +67,13 @@
         }
         
         .btnstyle {
-            padding-left: 7rem;
-            padding-top: 34px;
+            padding-left: 0rem;
+            padding-top: -39.1px
+        }
+        
+        .btnadj2 {
+            padding-left: 13rem;
+            margin-top: -2.3rem;
         }
         
         .topnav {
@@ -108,10 +112,6 @@
                 float: right;
                 display: block;
             }
-            .btnstyle {
-                padding-left: 7rem;
-                padding-top: 34px;
-            }
         }
         
         @media screen and (max-width: 400px) {
@@ -139,15 +139,10 @@
                 width: 100%;
                 text-align: left;
             }
-            .btnstyle {
-                padding-left: 7rem;
-                padding-top: 34px;
-            }
         }
     </style>
-    <!-- End of CSS -->
+
 </head>
-<!-- Body Start From Here -->
 
 <body>
 
@@ -160,20 +155,28 @@
     </div>
 
     <div class="header">
-        <h5 style="padding-right: 1rem">Online Serivice</h5>
+        <h5 style="padding-right: 1rem">Bank Serivice</h5>
         <div class="img">
             <img src="1.png"></img>
         </div>
     </div>
     <br><br><br><br><br>
     <div class="content">
-        <p style="color: #243e83; padding-left: 9rem;">Easy To Transfer & Get </p>
+        <p style="color: #243e83; padding-left: 1rem;">Easy To Transfer & Get </p>
         <div class="btnstyle">
-            <a class="button" href="view.php">View all Customers</a>
-            <a class="button" href="Transc.php">View all Transactions</a>
+            <div class="btnadj">
+                <a class="button" href="view.php">View Customers</a>
+                <div class="btnadj2">
+                    <a class="button" href="transc.php" style="margin-top: 0px;">ViewTransactions</a>
+                </div>
+            </div>
         </div>
     </div>
+
+
+
+
+
 </body>
-<!-- End Of Body -->
 
 </html>
