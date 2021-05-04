@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vault Bank</title>
+<title>Online Online Bank Serivicek Serivice</title>
 <style>
 .button {
       background-color: #2b67f8; 
@@ -176,7 +176,7 @@ td{
 </div>
 
 <div class="header">
-<h5 style="padding-right: 1rem">Bank Serivice</h5>
+<h5 style="padding-right: 1rem">Online Bank Serivice</h5>
 </div>
 <script>
 <script>

@@ -1,5 +1,5 @@
 # BanckingSystem
-This is Task 1 " Basic Banking System " of The Spark Foundation under their #GRIPMAY21 Program
+This is Task 1 " Online Online Bank Serivice " of The Spark Foundation under their #GRIPMAY21 Program
 
 #Languages Used
 1. HTML

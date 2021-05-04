@@ -20,7 +20,7 @@ $amount=$_POST["amount"];}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Vault bank</title>
+<title>Online Online Bank Serivice</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">    
 <link rel="stylesheet" href="bootstrap.min.css">
 <style>

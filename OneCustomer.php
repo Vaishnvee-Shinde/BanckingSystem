@@ -15,7 +15,7 @@ $_SESSION['sender']=$_SESSION['user'];
 <html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">    
-<title>Vault Bank</title>
+<title>Online Online Bank Serivice</title>
 <style>
  
    .header {
