@@ -15,7 +15,7 @@ $_SESSION['sender']=$_SESSION['user'];
 <html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">    
-<title>Online Online Bank Serivice</title>
+<title>Online Bank Service</title>
 <style>
  
    .header {
@@ -188,6 +188,7 @@ function myFunction() {
 <div class="center">  
   <div class="user_details">
     
+    <!-- Senders Deatils -->
     <h3>Customers Details</h3>
         <?php
         if (isset($_SESSION['user']))
@@ -212,6 +213,7 @@ function myFunction() {
 <img src="3.png" style=" height: 150px;"></img></div>
       <div class="trans"style="padding-right: 0rem; padding-left:55rem;margin-top: -13.5rem;text-decoration: bold;">
       <form action="transfer.php" method="POST">
+<!-- Make Transcation -->
                     <h3>Make a Transaction</h3>
                     <b>To</b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:&nbsp&nbsp
                 <select name="reciever" id="dropdown" class="textbox" required>

@@ -20,7 +20,7 @@ $amount=$_POST["amount"];}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Online Online Bank Serivice</title>
+<title>Online Bank Serivice</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">    
 <link rel="stylesheet" href="bootstrap.min.css">
 <style>
@@ -111,6 +111,8 @@ if($flag==true){
      {
          $s_acc=$row['Acc_Number'];
  }
+//  Transcation DEatiled Stored in the DB
+
  $sql = "SELECT * from customer where name='$receiver'";
  $result = $con-> query($sql);
 while($row = $result->fetch_assoc())

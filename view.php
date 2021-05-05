@@ -215,14 +215,18 @@ function myFunction() {
 
 <?php
 $conn = mysqli_connect("localhost", "root", "", "qxp");
+
 // Check connection
+
 if ($conn->connect_error) {
 die("Connection failed: " . $conn->connect_error);
 }
 $sql = "SELECT name, acc_number FROM customer";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
+
 // output data of each row
+
 while($row = $result->fetch_assoc()) {
     echo "<tr>";
     echo "<form method ='post' action = 'OneCustomer.php'>";
