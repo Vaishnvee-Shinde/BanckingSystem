@@ -1,4 +1,5 @@
 #BanckingSystem #WebDevlopment #Task1 #The-Spark-Foundation
+
 This is Task 1 " Online Bank Service " of The Spark Foundation under their #GRIPMAY21 Program
 
 #Languages Used
@@ -40,9 +41,9 @@ Transaction table records all transfers happened along with their time.
 
 Flow of the Website: Home Page > View all Users > Select and View one User > Transfer Money > Select reciever > View all Users > View Transfer History.
 
-![image](https://user-images.githubusercontent.com/65480790/117292465-dc06ff80-ae8d-11eb-9bf5-7e9d31fd072a.png)
-![image](https://user-images.githubusercontent.com/65480790/117292525-f0e39300-ae8d-11eb-9947-e1e7634e538b.png)
-![image](https://user-images.githubusercontent.com/65480790/117292598-08228080-ae8e-11eb-90ac-4424c1ee7854.png)
-![image](https://user-images.githubusercontent.com/65480790/117292671-1a9cba00-ae8e-11eb-9251-cb81bbb25db3.png)
+![image](/Images/home.png)
+![image](/Images/view customers.png)
+![image](/Images/transcation.png)
+![image](/Images/history.png)
 
 
