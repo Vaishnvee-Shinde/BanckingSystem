@@ -42,8 +42,11 @@ Transaction table records all transfers happened along with their time.
 Flow of the Website: Home Page > View all Users > Select and View one User > Transfer Money > Select reciever > View all Users > View Transfer History.
 
 ![image](/Images/home.png)
+
 ![image](/Images/view%20customers.png)
+
 ![image](/Images/transcation.png)
+
 ![image](/Images/history.png)
 
 
