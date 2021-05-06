@@ -1,5 +1,5 @@
-# BanckingSystem
-This is Task 1 " Online Online Bank Serivice " of The Spark Foundation under their #GRIPMAY21 Program
+#BanckingSystem #WebDevlopment #Task1 #The-Spark-Foundation
+This is Task 1 " Online Bank Service " of The Spark Foundation under their #GRIPMAY21 Program
 
 #Languages Used
 1. HTML
@@ -8,14 +8,41 @@ This is Task 1 " Online Online Bank Serivice " of The Spark Foundation under the
 4. JAVA SCRIPT
 
 #Database Used
-MySql
+ 1. MySql
 
-To Run This Project Follow Below Steps:
-
+To Run This Project Following Software Needs To Be Installed :
 1. XAMP
 Download Link: https://www.apachefriends.org/
 Download XAMP Setup according your system configuration
 Install The Setup
-2. Import tha databse file i.e customerdb which is present above
-3. open chrome or anyother browser and run the index.html file
+
+2. Visual Studio 
+Download Link: https://code.visualstudio.com/download
+
+               OR
+3. Notepad++
+Download Link: https://notepad-plus-plus.org/downloads/
+
+                OR
+4. Sublime Text
+Download Link: https://www.sublimetext.com/
+ 
+To Run This Project Follow Below Steps:
+
+1. Install all the required setup
+2. Import tha databse file i.e customerdb which is present above into the MyPhp Admin.
+3. Open chrome or anyother browser and run the index.html file
+
+#Database contains two Tables- Users Table & Transaction Table
+
+User table have basic fields such as name, email & current balance.
+Transaction table records all transfers happened along with their time.
+
+Flow of the Website: Home Page > View all Users > Select and View one User > Transfer Money > Select reciever > View all Users > View Transfer History.
+
+![image](https://user-images.githubusercontent.com/65480790/117292465-dc06ff80-ae8d-11eb-9bf5-7e9d31fd072a.png)
+![image](https://user-images.githubusercontent.com/65480790/117292525-f0e39300-ae8d-11eb-9947-e1e7634e538b.png)
+![image](https://user-images.githubusercontent.com/65480790/117292598-08228080-ae8e-11eb-90ac-4424c1ee7854.png)
+![image](https://user-images.githubusercontent.com/65480790/117292671-1a9cba00-ae8e-11eb-9251-cb81bbb25db3.png)
+
 
