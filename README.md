@@ -1,4 +1,4 @@
-#BanckingSystem #WebDevlopment #Task1 #The-Spark-Foundation
+#BankingSystem #WebDevlopment #Task1 #The-Spark-Foundation
 
 This is Task 1 " Online Bank Service " of The Spark Foundation under their #GRIPMAY21 Program
 
