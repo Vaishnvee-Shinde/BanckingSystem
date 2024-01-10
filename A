@@ -1,4 +1,4 @@
-awk 'NR==2 && FNR==1 {count[FILENAME]=$2; next} {data[$1]=data[$1]"\t"count[FILENAME]":"$2} END {for (key in data) print key,data[key]}' a.txt b.txt > aligned_records.txt
+awk 'NR==2 && FNR==1 {count[FILENAME]=$0; next} {data[$0]=count[FILENAME]":"$2} END {for (key in count) print key, (key in data) ? data[key] : "0"}' a.txt b.txt > aligned_records.txt
 
 
 
