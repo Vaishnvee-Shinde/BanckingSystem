@@ -1,4 +1,5 @@
-awk 'NR==FNR && FNR==2 {count[FILENAME]=$0; next} {gsub(/[^a-zA-Z0-9 ]/, "", $0); data[$0]=count[FILENAME]":"$2} END {for (key in data) print key, (key in count) ? data[key] : count[key]": 0"}' a.txt b.txt > aligned_records.txt
+awk 'NR==FNR && FNR==2 {count[FILENAME]=$0; next} {gsub(/[^a-zA-Z0-9 ]/, "", $0); data[$0]=(data[$0] ? data[$0] : "0") "\t" count[FILENAME]":"$2} END {for (key in count) print key ": " (key in data ? data[key] : "0")}' a.txt b.txt > aligned_records.txt
+
 
 
 
