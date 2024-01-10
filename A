@@ -1,3 +1,4 @@
-awk 'NR==2 {count[$1 FS FILENAME]=$2} END {for (key in count) if(count[key] == count[key" "ARGV[1]] && count[key" "ARGV[1]] != "") print key":"count[key]}' a.txt b.txt > matched_records.txt
+awk 'NR==2 && FNR==1 {count[FILENAME]=$2; next} {data[$1]=data[$1]"\t"count[FILENAME]":"$2} END {for (key in data) print key,data[key]}' a.txt b.txt > aligned_records.txt
+
 
 
