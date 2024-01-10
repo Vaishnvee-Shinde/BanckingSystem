@@ -1,0 +1,2 @@
+awk 'NR==2 {count[$1]=$2; file[NR]=$1} END {for (i=3; i<=NR; i++) {if ($1 in count && count[$1] == $2) print $1 ":" count[$1]}}' a.txt b.txt > matched_records.txt
+
