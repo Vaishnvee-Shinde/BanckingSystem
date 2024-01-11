@@ -1,4 +1,21 @@
-awk 'NR==FNR && FNR==2 {count[FILENAME]=$0; next} {gsub(/[^a-zA-Z0-9 ]/, "", $0); data[$0]=(data[$0] ? data[$0] : "0") "\t" count[FILENAME]":"$2} END {for (key in count) print key ": " (key in data ? data[key] : "0")}' a.txt b.txt > aligned_records.txt
+# Step 1: Combine Records with Filename and Count
+cat a.txt b.txt | awk -F: '{ count[$1]=count[$1]+$2 } END { for (i in count) print i":"count[i] }' > combined.txt
+
+# Step 2: Remove Extra Spaces
+sed -i 's/ //g' combined.txt
+
+# Step 3: Handle Case Sensitivity (Convert to uppercase)
+awk '{print toupper($0)}' combined.txt > temp_combined.txt
+mv temp_combined.txt combined.txt
+
+# Step 4: Avoid Duplicate Filenames (Remove duplicates)
+awk -F: '!seen[$1]++' combined.txt > temp_combined.txt
+mv temp_combined.txt combined.txt
+
+# Step 5: Fill Missing Records
+awk -F: '{ if ($2 == "") $2=0; print }' combined.txt > temp_combined.txt
+mv temp_combined.txt combined.txt
+
 
 
 
