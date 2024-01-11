@@ -1,1 +1,1 @@
-awk -F: '!seen[gensub(/[[:space:]]/, "", "g", $1)]++ { count[$1] = count[$1] $0 } END { for (i in count) print count[i] }' a.txt b.txt > combined.txt
+awk -F: '{ filename = gensub(/[[:space:]]/, "", "g", $1); count[filename] = count[filename] $0 } END { for (i in count) print count[i] }' a.txt b.txt > combined.txt
