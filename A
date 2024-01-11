@@ -9,3 +9,6 @@ awk -F: '{ filename = gensub(/[[:space:]]/, "", "g", $1); count[filename] = coun
 
 
 awk -F: '{ filename = gensub(/[[:space:]]/, "", "g", $1); if (!seen[filename]) { count[filename] = $2; seen[filename] = 1 } } END { for (i in count) print i ":" (count[i] ? count[i] : "0") ":" (count[i] ? count[i] : "0") }' a.txt b.txt > combined.txt
+
+awk -F: '{ filename = gensub(/[[:space:]]/, "", "g", $1); count[filename] = $2; seen[filename] = 1 } END { for (i in seen) print i ":" (count[i] ? count[i] : "0") ":" (count[i] ? count[i] : "0") }' a.txt b.txt > combined.txt
+
