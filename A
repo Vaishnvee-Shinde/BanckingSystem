@@ -1,5 +1,5 @@
 # Step 1: Combine Records with Filename and Count
-cat a.txt b.txt | awk -F: '{ count[$1]=count[$1]+$2 } END { for (i in count) print i":"count[i] }' > combined.txt
+cat a.txt b.txt | awk -F: '{ count[gensub(/[[:space:]]/, "", "g", $1)]=count[gensub(/[[:space:]]/, "", "g", $1)]+$2 } END { for (i in count) print i":"count[i] }' > combined.txt
 
 # Step 2: Remove Extra Spaces
 sed -i 's/ //g' combined.txt
@@ -20,8 +20,12 @@ mv temp_combined.txt combined.txt
 echo -e "FileName:\tRecord count:\tFile record count" > final_combined.txt
 
 # Append Data
-cat combined.txt >> final_combined.txt
-
-
-
-
+awk -F: 'BEGIN { OFS="\t"; print "TOTAL", "MMKT", "ST-PRD", "MUNI", "ESM EURO", "ISSUER EXPORT", "ESM LAMR", "ESM ASIA", "FIXED INCOME", "ESM POOLS", "ESM NAMR" } 
+{ 
+    count[$1]=$2 
+} 
+END { 
+    for (i in count) 
+        printf "%s\t", count[i] 
+    printf "\n" 
+}' combined.txt >> final_combined.txt
