@@ -1,23 +1,25 @@
-# Step 1: Combine Records with Filename and Count
-cat a.txt b.txt | awk -F: '{ count[$1]=count[$1]+$2 } END { for (i in count) print i":"count[i] }' > combined.txt
+# Combine Records with Filename and Count
+cat a.txt b.txt | awk -F: '{ count[gensub(/[[:space:]]/, "", "g", $1)]=count[gensub(/[[:space:]]/, "", "g", $1)]+$2 } END { for (i in count) print i":"count[i] }' > combined.txt
 
-# Step 2: Remove Extra Spaces
+# Remove Extra Spaces
 sed -i 's/ //g' combined.txt
 
-# Step 3: Handle Case Sensitivity (Convert to uppercase)
+# Handle Case Sensitivity (Convert to uppercase)
 awk '{print toupper($0)}' combined.txt > temp_combined.txt
 mv temp_combined.txt combined.txt
 
-# Step 4: Avoid Duplicate Filenames (Remove duplicates)
-awk -F: '!seen[$1]++' combined.txt > temp_combined.txt
-mv temp_combined.txt combined.txt
-
-# Step 5: Fill Missing Records
-awk -F: '{ if ($2 == "") $2=0; print }' combined.txt > temp_combined.txt
-mv temp_combined.txt combined.txt
-
 # Add Header
-echo -e "FileName:\tRecord count:\tFile record count" > final_combined.txt
+echo -e "filename:\tRecord count:\tFile record count" > final_combined.txt
 
 # Append Data
-awk -F: '{ if ($1 == "TOTAL") total=$2; else if ($1 == "MMKT") mmkt=$2; else if ($1 == "ST-PRD") stprd=$2; else if ($1 == "MUNI") muni=$2; else if ($1 == "ESM EURO") esmeuro=$2; else if ($1 == "ISSUER EXPORT") issuerexport=$2; else if ($1 == "ESM LAMR") esmlamr=$2; else if ($1 == "ESM ASIA") esmasia=$2; else if ($1 == "FIXED INCOME") fixedincome=$2; else if ($1 == "ESM POOLS") esmpools=$2; else if ($1 == "ESM NAMR") esmnamr=$2; } END { printf "TOTAL:\t%d\t%d\nMMKT:\t%d\t%d\nST-PRD:\t%d\t%d\nMUNI:\t%d\t%d\nESM EURO:\t%d\t%d\nISSUER EXPORT:\t%d\t%d\nESM LAMR:\t%d\t%d\nESM ASIA:\t%d\t%d\nFIXED INCOME:\t%d\t%d\nESM POOLS:\t%d\t%d\nESM NAMR:\t%d\t%d\n", total, mmkt, stprd, muni, esmeuro, issuerexport, esmlamr, esmasia, fixedincome, esmpools, esmnamr }' combined.txt >> final_combined.txt
+awk -F: '
+BEGIN { OFS = "\t"; }
+{
+    filename = gensub(/[[:space:]]/, "", "g", $1);
+    count[filename] = $2;
+}
+END {
+    for (filename in count) {
+        printf "%s:\t%d\t%d\n", filename, count[filename], count[filename];
+    }
+}' combined.txt >> final_combined.txt
