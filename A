@@ -1,5 +1,5 @@
 # Combine Records with Filename and Count
-cat a.txt b.txt | awk -F: '{ count[gensub(/[[:space:]]/, "", "g", $1)]=count[gensub(/[[:space:]]/, "", "g", $1)]+$2 } END { for (i in count) print i":"count[i] }' > combined.txt
+cat a.txt b.txt | awk -F: '{ count[gensub(/[[:space:]]/, "", "g", $1)][FILENAME]=$2 } END { for (i in count) print i":"count[i]["a.txt"]":"count[i]["b.txt"] }' > combined.txt
 
 # Remove Extra Spaces
 sed -i 's/ //g' combined.txt
@@ -9,17 +9,22 @@ awk '{print toupper($0)}' combined.txt > temp_combined.txt
 mv temp_combined.txt combined.txt
 
 # Add Header
-echo -e "filename:\tRecord count:\tFile record count" > final_combined.txt
+echo -e "filename:\tRecord count (a.txt):\tFile record count (b.txt)" > final_combined.txt
 
 # Append Data
 awk -F: '
 BEGIN { OFS = "\t"; }
 {
     filename = gensub(/[[:space:]]/, "", "g", $1);
-    count[filename] = $2;
+    count[filename]["a.txt"] = $2;
+    count[filename]["b.txt"] = $3;
 }
 END {
+    # Print the output for each filename without any mathematical work
     for (filename in count) {
-        printf "%s:\t%d\t%d\n", filename, count[filename], count[filename];
+        if (filename != "TOTAL" && "TOTAL" in count && count[filename]["a.txt"] != "" && count[filename]["b.txt"] != "" && count[filename]["a.txt"] != count[filename]["b.txt"]) {
+            printf "%s:\t%s\t%s\n", filename, count[filename]["a.txt"], count[filename]["b.txt"];
+        }
     }
 }' combined.txt >> final_combined.txt
+
