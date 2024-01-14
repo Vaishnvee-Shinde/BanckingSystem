@@ -15,3 +15,30 @@ awk -F: '{ filename = gensub(/[[:space:]]/, "", "g", $1); count[filename] = $2; 
 
 awk -F: '{ filename = gensub(/[[:space:]]/, "", "g", $1); count[filename][FILENAME] = $2; seen[filename] = 1 } END { for (i in seen) print i ":" (count[i]["a.txt"] ? count[i]["a.txt"] : "0") ":" (count[i]["b.txt"] ? count[i]["b.txt"] : "0") }' a.txt b.txt > combined.txt
 
+1. Developed _gsib_race_load.sh & axiom_sib_race_load.ctl scripts for loading data into GSIB_RACE DATA_STAGE Table.
+   
+2. Established pr_gsib -> W_BCE workflow to execute and monitor the entire process.
+
+3. Enhanced pr_gsib - ds_race_data_staging_new loader:
+   - Added execute statement for merging and transforming data from GSIB_RACE_DATA_STAGE and GSIB_RACE_GL_MAPPING tables.
+   - Computed row order, extracted substrings, and applied conditional logic for mapping status determination.
+   - Performed actions to classify rows as mapped or unmapped based on specified criteria.
+   - Transformed data inserted into ds_race_data_staging table.
+
+4. Implemented Feed _Count _Validator:
+   - Validated data at the axiom level to ensure accuracy.
+
+5. Spearheaded Race Migration process enhancement in Unix environments:
+   - Introduced dynamic partition generation based on REPORTING PERIOD from GSIB control table.
+   - Optimized data organization and query performance.
+
+6. Streamlined data management:
+   - Consolidated to a single data source for faster responses.
+   - Reduced execution time, improving overall efficiency.
+
+7. Facilitated migration from Unix to Axiom:
+   - Increased flexibility in data flow for the Race Migration process.
+   - Axiom environment offers enhanced adaptability and scalability compared to Unix, allowing seamless adjustments to evolving business needs.
+   - Improved agility in data processing, ensuring the system remains responsive to changing requirements.
+   - Leveraged Axiom's capabilities to streamline data flow, contributing to a more flexible and adaptable solution.
+
