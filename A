@@ -1,6 +1,13 @@
 for col_num in {1..250}; do
     awk -v col_num=$col_num -F'|' 'BEGIN { srand(); } { if (col_num > NF) next; print "Column " col_num ": " $col_num; }' your_file.txt | shuf -n 6
 done
+for col_num in {1..250}; do
+    result=$(awk -v col_num=$col_num -F'|' 'BEGIN { found = 0; } { if (col_num > NF) next; if ($col_num != "") { found = 1; } } END { if (found == 0) { print "Column " col_num ": blank"; } }' your_file.txt)
+    if [ -n "$result" ]; then
+        echo "Column $col_num:"
+        echo "$result"
+    fi
+done
 
 
 
