@@ -6,6 +6,10 @@ for col_num in {1..250}; do
     awk -v col_num=$col_num -F'|' 'BEGIN { srand(); } { if (col_num > NF) next; if ($col_num != "") { values[NR] = $col_num; } } END { if (length(values) > 0) { print "Column " col_num ":"; for (i = 1; i <= 6; i++) { random = int(rand() * length(values)) + 1; print values[random]; } } else { print "Column " col_num ": blank"; } }' your_file.txt
 done
 
+for col_num in {1..250}; do
+    awk -v col_num=$col_num -F'|' 'BEGIN { found = 0; } { if (col_num > NF) next; if ($col_num != "") { values[++found] = $col_num; if (found >= 10) break; } } END { if (found > 0) { print "Column " col_num ":"; for (i = 1; i <= found; i++) { print values[i]; } } else { print "Column " col_num ": blank"; } }' your_file.txt
+done
+
 
 
 
