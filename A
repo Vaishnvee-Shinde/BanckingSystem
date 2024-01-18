@@ -1,4 +1,9 @@
-awk -F: '{ filename = gensub(/[[:space:]]/, "", "g", $1); count[filename] = count[filename] $0 } END { for (i in count) print count[i] }' a.txt b.txt > combined.txt
+for col_num in {1..250}; do
+    awk -v col_num=$col_num -F'|' 'BEGIN { srand(); } { if (col_num > NF) next; print "Column " col_num ": " $col_num; }' your_file.txt | shuf -n 6
+done
+
+
+
 
 awk -F: '{ filename = gensub(/[[:space:]]/, "", "g", $1); count[filename][$2] = $0 } END { for (i in count) print filename ":" (count[i]["a.txt"] ? count[i]["a.txt"] : "0") ":" (count[i]["b.txt"] ? count[i]["b.txt"] : "0") }' a.txt b.txt > combined.txt
  
