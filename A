@@ -1,34 +1,20 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Chart, ChartConfiguration, ChartType } from 'chart.js';
 
 @Component({
-  selector: 'app-chart',
-  template: `
-    <div class="container mx-auto p-4">
-      <canvas #chartCanvas></canvas>
-      <div class="flex justify-center space-x-2 mt-4">
-        <label class="inline-flex items-center" *ngFor="let dataset of chartData.datasets; let i = index">
-          <input type="checkbox" [checked]="!dataset.hidden" (change)="toggleDataset(i)" class="form-checkbox">
-          <span class="ml-2">{{dataset.label}}</span>
-        </label>
-      </div>
-      <div class="mt-4">
-        <button *ngFor="let type of chartTypes" (click)="changeChartType(type.id)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          {{type.title}}
-        </button>
-      </div>
-    </div>
-  `,
-  styles: []
+  selector: 'app-tco-forecasting',
+  templateUrl: './tco-forecasting.component.html',
+  styleUrls: ['./tco-forecasting.component.css']
 })
-export class ChartComponent implements OnInit {
-  @ViewChild('chartCanvas') chartCanvas: any;
-  chart!: Chart;
-  chartTypes: { id: ChartType, title: string }[] = [
+export class TcoForecastingComponent implements OnInit {
+  @ViewChild('chartCanvas') chartCanvas: ElementRef<HTMLCanvasElement>;
+  chart: Chart;
+  chartTypes: { id: ChartType; title: string }[] = [
     { id: 'line', title: 'Line' },
     { id: 'bar', title: 'Bar' },
-    // Add other chart types as needed
+    // ... other chart types
   ];
+
   chartData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
@@ -40,9 +26,10 @@ export class ChartComponent implements OnInit {
         borderWidth: 1,
         hidden: false
       },
-      // Add more datasets if needed
+      // ... other datasets
     ]
   };
+
   chartConfig: ChartConfiguration = {
     type: 'bar',
     data: this.chartData,
@@ -58,7 +45,7 @@ export class ChartComponent implements OnInit {
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    this.chart = new Chart(this.chartCanvas.nativeElement, this.chartConfig);
+    this.chart = new Chart(this.chartCanvas.nativeElement.getContext('2d'), this.chartConfig);
   }
 
   toggleDataset(index: number): void {
@@ -67,29 +54,41 @@ export class ChartComponent implements OnInit {
   }
 
   changeChartType(newType: ChartType): void {
-    this.chart.config.type = newType;
-    this.chart.update();
+    this.chart.destroy(); // Destroy the old chart
+    this.chartConfig.type = newType; // Assign new chart type
+    this.chart = new Chart(this.chartCanvas.nativeElement.getContext('2d'), this.chartConfig); // Create new chart
+  }
+
+  // Implement search functionality to filter datasets
+  searchDataset(searchTerm: string): void {
+    // You can filter your datasets based on the search term
+    // For example, you might want to implement something like:
+    // this.chartData.datasets = this.chartData.datasets.filter(dataset => dataset.label.includes(searchTerm));
+    // Don't forget to update or re-render the chart after filtering
   }
 }
 
 
 
-
-
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { ChartComponent } from './chart.component';
-
-@NgModule({
-  declarations: [
-    ChartComponent
-    // ... other components
-  ],
-  imports: [
-    BrowserModule
-    // ... other modules
-  ],
-  providers: [],
-  bootstrap: [ChartComponent] // or your main component
-})
-export class AppModule { }
+<div class="container mx-auto p-4">
+  <canvas #chartCanvas></canvas>
+  <div class="flex justify-center space-x-2 mt-4">
+    <div *ngFor="let dataset of chartData.datasets; let i = index">
+      <label class="flex items-center space-x-2">
+        <input type="checkbox" [checked]="!dataset.hidden" (change)="toggleDataset(i)" class="form-checkbox">
+        <span>{{ dataset.label }}</span>
+      </label>
+    </div>
+  </div>
+  <div class="flex space-x-2 mt-4">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Search datasets..." class="form-input">
+    <button (click)="searchDataset(searchTerm)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      Search
+    </button>
+  </div>
+  <div class="mt-4">
+    <button *ngFor="let type of chartTypes" (click)="changeChartType(type.id)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      {{ type.title }}
+    </button>
+  </div>
+</div>
