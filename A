@@ -1,83 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interactive Bar Graph with Search</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-<input type="text" id="search-input" placeholder="Search..." oninput="updateGraph()">
-<div>
-  <canvas id="bar-chart"></canvas>
-</div>
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import * as Highcharts from 'highcharts';
 
-<script src="script.js"></script>
-</body>
-</html>
+@Component({
+    selector: 'app-chart',
+    templateUrl: './chart.component.html',
+    styleUrls: ['./chart.component.css']
+})
+export class ChartComponent implements OnInit, OnDestroy {
+    Highcharts: typeof Highcharts = Highcharts;
+    chart: Highcharts.Chart;
+    chartOptions: Highcharts.Options;
 
-
-
-
-// Assuming you have a function to get your data from the backend
-// This could be through an API call or directly from your dataset
-function fetchData(searchTerm) {
-  // Replace this with the actual API call
-  // For demonstration, we're returning a promise that resolves with a filtered dataset
-  return new Promise(resolve => {
-    const dataset = [
-      { label: 'Dataset 1', data: [50, 60, 70], backgroundColor: 'rgba(255, 99, 132, 0.2)' },
-      { label: 'Dataset 2', data: [30, 40, 50], backgroundColor: 'rgba(54, 162, 235, 0.2)' },
-      // ... more datasets
+    chartTypes = [
+        { "id": "line", "title": "Line" },
+        { "id": "spline", "title": "Smooth line" },
+        { "id": "area", "title": "Area" },
+        { "id": "areaspline", "title": "Smooth area" },
+        { "id": "column", "title": "Column" },
+        { "id": "bar", "title": "Bar" },
+        { "id": "pie", "title": "Pie" },
+        { "id": "scatter", "title": "Scatter" }
     ];
 
-    // Filtering the dataset based on the search term
-    const filteredData = dataset.filter(d => d.label.toLowerCase().includes(searchTerm.toLowerCase()));
-    
-    resolve(filteredData);
-  });
-}
+    chartSeries = [
+        { "name": "Some data", "data": [1, 2, 4, 7, 3] },
+        { "name": "Some data 3", "data": [3, 1, 9, 5, 2] }
+    ];
 
-// Debounce function to limit the rate at which a function can fire.
-function debounce(func, delay) {
-  let debounceTimer;
-  return function() {
-    const context = this;
-    const args = arguments;
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => func.apply(context, args), delay);
-  }
-}
+    ngOnInit(): void {
+        this.chartOptions = {
+            chart: {
+                type: 'areaspline'
+            },
+            title: {
+                text: 'Hello'
+            },
+            credits: {
+                enabled: true
+            },
+            series: this.chartSeries
+        };
 
-let barChart; // Global variable to hold the chart instance
-
-function renderGraph(data) {
-  const ctx = document.getElementById('bar-chart').getContext('2d');
-  if (barChart) {
-    barChart.destroy(); // Destroy the old chart instance before creating a new one
-  }
-  barChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['February 23', 'March 23', 'April 23'], // Replace this with actual labels
-      datasets: data
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
+        this.chart = Highcharts.chart('chart-container', this.chartOptions);
     }
-  });
+
+    ngOnDestroy(): void {
+        if (this.chart) {
+            this.chart.destroy();
+        }
+    }
+
+    addSeries(): void {
+        const rnd = []; // Add your random data generation logic here
+        this.chart.addSeries({
+            data: rnd
+        });
+    }
+
+    removeSeries(id: number): void {
+        if (this.chart.series[id]) {
+            this.chart.series[id].remove();
+        }
+    }
+
+    changeChartType(type: string): void {
+        this.chart.update({
+            chart: {
+                type: type
+            }
+        });
+    }
 }
+-------------------------------------------
 
-// Initialize the graph with all data
-fetchData('').then(renderGraph);
-
-// Update graph when search input changes
-// Wrapped the updateGraph function with debounce to limit the API calls
-const updateGraph = debounce(function() {
-  const searchTerm = document.getElementById('search-input').value;
-  fetchData(searchTerm).then(renderGraph);
-}, 250); // Waiting for 250ms after the last keystroke
+<div class="row">
+    <div class="span9">
+        <div id="chart-container"></div>
+    </div>
+    <div class="span4">
+        <div class="row-fluid">
+            Default Type
+            <select (change)="changeChartType($event.target.value)">
+                <option *ngFor="let type of chartTypes" [value]="type.id">{{ type.title }}</option>
+            </select>
+        </div>
+        <div class="row-fluid">
+            <button (click)="addSeries()">Add Series</button>
+        </div>
+    </div>
+</div>
