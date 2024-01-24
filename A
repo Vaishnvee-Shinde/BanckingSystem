@@ -1,74 +1,26 @@
+<!-- tco-forecasting.component.html -->
 <div class="container mx-auto p-4">
-  <canvas #chartCanvas></canvas>
-  
-  <!-- Search input -->
-  <div class="mt-4">
-    <input type="text" [(ngModel)]="searchTerm" (input)="search()" placeholder="Search datasets..." class="p-2 border rounded">
-    <div *ngIf="filteredDatasets.length > 0" class="absolute mt-1 bg-white border rounded max-h-48 overflow-auto">
-      <div *ngFor="let dataset of filteredDatasets; let i = index">
-        <label class="flex items-center p-2 cursor-pointer hover:bg-gray-200">
-          <input type="checkbox" [checked]="!dataset.hidden" (change)="toggleDataset(i)" class="mr-2">
-          {{ dataset.label }}
-        </label>
-      </div>
-    </div>
-  </div>
+  <!-- Search bar -->
+  <input
+    type="text"
+    [(ngModel)]="searchTerm"
+    (focus)="showDropdown = true"
+    (blur)="hideDropdown()"
+    class="form-control"
+    placeholder="Search datasets..."
+  />
 
-  <!-- Buttons to change chart type -->
-  <div class="mt-4">
-    <button *ngFor="let type of chartTypes" (click)="changeChartType(type.id)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-      {{type.title}}
+  <!-- Dropdown -->
+  <div
+    *ngIf="showDropdown"
+    class="dropdown-content max-h-48 overflow-y-auto"
+  >
+    <button
+      *ngFor="let dataset of filteredDatasets"
+      (click)="selectDataset(dataset)"
+      class="block w-full text-left"
+    >
+      {{ dataset.label }}
     </button>
   </div>
 </div>
-
-
-
-
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Chart, ChartConfiguration, ChartType } from 'chart.js';
-import { FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-
-@Component({
-  selector: 'app-tco-forecasting',
-  templateUrl: './tco-forecasting.component.html',
-  styleUrls: ['./tco-forecasting.component.css']
-})
-export class TcoForecastingComponent implements OnInit {
-  @ViewChild('chartCanvas') chartCanvas!: ElementRef<HTMLCanvasElement>;
-  chart!: Chart;
-  searchTerm: string = '';
-  chartTypes: { id: ChartType, title: string }[] = [
-    // ... chart types
-  ];
-  chartData = {
-    // ... chart data
-  };
-  filteredDatasets: any[] = []; // This will hold the datasets filtered by the search term
-
-  ngOnInit(): void {
-    this.filteredDatasets = this.chartData.datasets; // Initially, all datasets are shown
-  }
-
-  ngAfterViewInit(): void {
-    // ... chart initialization
-  }
-
-  search(): void {
-    const searchTermLower = this.searchTerm.toLowerCase();
-    this.filteredDatasets = this.chartData.datasets.filter(dataset =>
-      dataset.label.toLowerCase().includes(searchTermLower)
-    );
-  }
-
-  toggleDataset(index: number): void {
-    const isHidden = this.chartData.datasets[index].hidden;
-    this.chartData.datasets[index].hidden = !isHidden;
-    this.chart.update();
-  }
-
-  changeChartType(newType: ChartType): void {
-    // ... change chart type
-  }
-}
