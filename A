@@ -1,4 +1,9 @@
-<div class="flex items-center justify-center h-screen bg-gray-800">
+awk 'BEGIN{FS=OFS=":"} FNR==NR{a[tolower($1)]=$1; next} { $1=a[tolower($1)]; print }' input1.txt input2.txt outputfile.txt > new_outputfile.txt
+
+
+
+
+
   <div class="relative">
     <input id="searchInput" type="text" placeholder="Search..." class="hidden pl-4 pr-10 py-2 rounded-full bg-gray-700 text-white focus:outline-none">
     <button id="searchBtn" class="w-16 h-16 bg-blue-600 rounded-full transition-all duration-300 ease-in-out focus:outline-none"></button>
