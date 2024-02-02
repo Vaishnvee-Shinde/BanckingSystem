@@ -1,4 +1,11 @@
-awk 'BEGIN{FS=OFS=":"} FNR==NR{a[tolower($1)]=$1; next} { $1=a[tolower($1)]; print }' input1.txt input2.txt outputfile.txt > new_outputfile.txt
+I made all the necessary updates based on the review:
+
+1. Restored previous commands and added new ones for updates.
+2. Updated the method for fetching feed record counts.
+3. Inserted spaces between file names in emails.
+4. Merged database and file counts in one temporary file for email records.
+5. Modified only specified ESM shell scripts, reverting others.
+6. Highlighted mismatch counts in red in emails.awk 'BEGIN{FS=OFS=":"} FNR==NR{a[tolower($1)]=$1; next} { $1=a[tolower($1)]; print }' input1.txt input2.txt outputfile.txt > new_outputfile.txt
 
 
 
