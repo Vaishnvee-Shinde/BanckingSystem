@@ -1,3 +1,8 @@
+UPDATE your_table_name
+SET BD = BD + 1
+WHERE BD IN (2, 5, 8, 10)
+AND DAYOFWEEK(STR_TO_DATE(CONCAT(BY, '-', BM, '-', BD), '%Y-%m-%d')) IN (1, 7);
+
 const eyeCatchingNudeAndFreshColors = [
   '#FDE2E4', // Soft Pink
   '#E2ECE9', // Mint Cream
